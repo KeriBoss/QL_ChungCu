@@ -5,7 +5,7 @@ class DoanhMucNenDat extends Database{
      * lấy tất cả doanh mục lo đất
      */
     function layTatCaNenDat(){
-        $sql = parent::$connection->prepare("SELECT *,dm_nendat.mo_ta as mo_ta,dm_nendat.dien_tich as dien_tich, ql_duan.id as duan_id, dm_nendat.id as nendat_id, dm_khudat.id as khudat_id, dm_lodat.id as lodat_id FROM dm_nendat INNER JOIN dm_khudat ON dm_nendat.id_khudat = dm_khudat.id INNER JOIN dm_lodat ON dm_nendat.id_lodat = dm_lodat.id INNER JOIN ql_duan ON dm_khudat.id_duan = ql_duan.id");
+        $sql = parent::$connection->prepare("SELECT *,dm_nendat.image as image,dm_nendat.mo_ta as mo_ta,dm_nendat.dien_tich as dien_tich, ql_duan.id as duan_id, dm_nendat.id as nendat_id, dm_khudat.id as khudat_id, dm_lodat.id as lodat_id FROM dm_nendat INNER JOIN dm_khudat ON dm_nendat.id_khudat = dm_khudat.id INNER JOIN dm_lodat ON dm_nendat.id_lodat = dm_lodat.id INNER JOIN ql_duan ON dm_khudat.id_duan = ql_duan.id");
         return parent::select($sql);
     }
     /**
@@ -20,7 +20,7 @@ class DoanhMucNenDat extends Database{
      * Update lo dat by id
      */
     function update($id, $ten, $hinh, $dien_tich, $mo_ta, $id_khudat){
-        $sql = parent::$connection->prepare("UPDATE `dm_lodat` SET `ten_lodat`= ? ,`image`= ? ,`dien_tich`= ? ,`mo_ta`= ? ,`id_khudat`= ?   WHERE id = ?");
+        $sql = parent::$connection->prepare("UPDATE `dm_nendat` SET `ten_lodat`= ? ,`image`= ? ,`dien_tich`= ? ,`mo_ta`= ? ,`id_khudat`= ?   WHERE id = ?");
         $sql->bind_param('ssisii', $ten, $hinh, $dien_tich, $mo_ta, $id_khudat, $id);
         return $sql->execute();
     }
@@ -28,7 +28,7 @@ class DoanhMucNenDat extends Database{
      * Delete lo dat by Id
      */
     function delete($id){
-        $sql = parent::$connection->prepare("DELETE FROM `dm_lodat` WHERE `id` = ?");
+        $sql = parent::$connection->prepare("DELETE FROM `dm_nendat` WHERE `id` = ?");
         $sql->bind_param('i', $id);
         return $sql->execute();
     }
@@ -37,6 +37,14 @@ class DoanhMucNenDat extends Database{
      */
     function layLoDatTheoId($id){
         $sql = parent::$connection->prepare("SELECT * from dm_lodat where id = ?");
+        $sql->bind_param('i', $id);
+        return parent::select($sql);
+    }
+    /**
+     * Lay nen dat theo id
+     */
+    function layNenDatTheoId($id){
+        $sql = parent::$connection->prepare("SELECT * from dm_nendat where id = ?");
         $sql->bind_param('i', $id);
         return parent::select($sql);
     }

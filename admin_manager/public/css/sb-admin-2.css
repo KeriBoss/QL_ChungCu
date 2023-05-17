@@ -4793,7 +4793,7 @@ input[type="button"].btn-block {
 }
 
 .page-item.active .page-link {
-  z-index: 3;
+  z-index: 2;
   color: #fff;
   background-color: #4e73df;
   border-color: #4e73df;
@@ -11278,4 +11278,34 @@ footer.sticky-footer .copyright {
 
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
+}
+
+
+
+/*TODO: custom*/
+.form-report{
+  padding: 15px 25px;
+  color: #000;
+}
+.form-report label{
+  margin-bottom: 0;
+}
+form .parent{
+  border: 1px solid var(--dark);
+  width: max-content;
+  max-width: 100%;
+  padding: 20px;
+  border-radius: 8px;
+}
+.parent .form-group{
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+.parent .form-group input[type=radio]{
+  margin-right: 5px;
+}
+.group-flex{
+  display: flex;
+  gap: 10px;
 }

@@ -1,6 +1,8 @@
 //Get change of value khu dat
 const khudat = document.getElementById('khudat');
 const lodat = document.getElementById('lodat');
+const ten_duan = document.getElementById('name_duan');
+const id_duan = document.getElementById('id_duan');
 
 // Create our number formatter.
 const formatter = new Intl.NumberFormat('vi-VN', {
@@ -30,6 +32,11 @@ khudat.addEventListener('change', function(event){
                 <option value="${item['id']}">${item['ten_lodat']}</option>
             `
         });
+        if(reponse.length > 0){
+            ten_duan.value = reponse[0]['ten_duan'];
+        }else{
+            ten_duan.value = '';
+        }
     });
 })
 
@@ -51,7 +58,28 @@ lodat.addEventListener('change', function(event){
                 <option value="${item['khudat_id']}">${item['ten_khudat']}</option>
             `
         });
+        if(reponse.length > 0){
+            ten_duan.value = reponse[0]['ten_duan'];
+        }else{
+            ten_duan.value = '';
+        }
     });
 })
 
-
+window.addEventListener('load', function(event){
+    let khudat_id = khudat.value;
+    $.ajax({
+        url: 'ajax_get_lodat.php',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            khudat_id: khudat_id
+        }
+    }).done(function (reponse) {
+        if(reponse.length > 0){
+            ten_duan.value = reponse[0]['ten_duan'];
+        }else{
+            ten_duan.value = '';
+        }
+    });
+})

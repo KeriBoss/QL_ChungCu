@@ -48,7 +48,7 @@ class DoanhMucLoDat extends Database{
      * Get lodat by khudat id
      */
     function layLoDatTheoKhuDat($id){
-        $sql = parent::$connection->prepare("SELECT * from dm_lodat where id_khudat = ?");
+        $sql = parent::$connection->prepare("SELECT *,dm_lodat.id as lodat_id, dm_khudat.id as khudat_id, ql_duan.id as duan_id from dm_khudat INNER JOIN dm_lodat on dm_lodat.id_khudat = dm_khudat.id INNER JOIN ql_duan ON dm_khudat.id_duan = ql_duan.id WHERE dm_khudat.id = ?");
         $sql->bind_param('i', $id);
         return parent::select($sql);
     }

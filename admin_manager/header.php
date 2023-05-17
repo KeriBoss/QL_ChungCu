@@ -5,12 +5,13 @@ define('JPATH_BASE', dirname(__FILE__));
 require_once "../model/config.php";
 require_once "../model/database.php";
 
-//Check login for admin
-// if (!isset($_SESSION['admin'])) {
-//     header('location: ./login.php');
-// } else {
-//     $current_user = $_SESSION['admin'];
-// }
+// Check login for admin
+if (!isset($_SESSION['admin'])) {
+    header('location: ./login.php');
+} else {
+    $current_user = $_SESSION['admin'];
+}
+$target_dir = __DIR__ . "../public/img/du_an/";
 
 ?>
 <!DOCTYPE html>
@@ -53,7 +54,7 @@ require_once "../model/database.php";
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -99,57 +100,89 @@ require_once "../model/database.php";
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Addons
+                Báo cáo
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+                    aria-expanded="true" aria-controls="collapseThree">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Các Báo Cáo </span>
                 </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div id="collapseThree" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
+                        <a class="collapse-item" href="./danhsach_bc_congno.php">Báo Cáo Công Nợ</a>
+                        <a class="collapse-item" href="./danhsach_bc_hopdong.php">Báo Cáo Công Nợ</a>
+                        <a class="collapse-item" href="./danhsach_congno.php">Danh Sách Công Nợ</a>
                     </div>
                 </div>
             </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
-            <!-- Nav Item - Charts -->
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Hợp đồng
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+                    aria-expanded="true" aria-controls="collapseFour">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Tổng Hợp Hợp Đồng </span>
+                </a>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="./danhsach_hopdong.php">Danh sách hợp đồng</a>
+                        <a class="collapse-item" href="./danhsach_hopdong_phuluc.php">Hợp đồng phụ lục</a>
+                        <a class="collapse-item" href="./danhsach_hopdong_thanhly.php">Hợp đồng thanh lý</a>
+                    </div>
+                </div>
             </li>
-
-            <!-- Nav Item - Tables -->
+            
+            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
+                    aria-expanded="true" aria-controls="collapseFive">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Thêm Hợp Đồng </span>
+                </a>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="./them_hopdong_1.php">Thêm hợp đồng 1</a>
+                        <a class="collapse-item" href="./them_hopdong_2.php">Thêm hợp đồng 2</a>
+                        <a class="collapse-item" href="./them_hopdong_3.php">Thêm hợp đồng 3</a>
+                    </div>
+                </div>
             </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Khách hàng
+            </div>
 
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsesix"
+                    aria-expanded="true" aria-controls="collapsesix">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Thông tin khách hàng</span>
+                </a>
+                <div id="collapsesix" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="./danhsach_khachhang.php">Danh sách khách hàng</a>
+                    </div>
+                </div>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-            <!-- Sidebar Message -->
-            <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="public/img/undraw_rocket.svg" alt="...">
-                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
             </div>
 
         </ul>
@@ -334,7 +367,7 @@ require_once "../model/database.php";
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <!--Face user-->
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $current_user['name']?></span>
                                 <img class="img-profile rounded-circle"
                                     src="public/img/undraw_profile.svg">
                             </a>

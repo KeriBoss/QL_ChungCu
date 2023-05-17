@@ -35,7 +35,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="<?= $url ?>/logout.php">Logout</a>
+                <a class="btn btn-primary" href="./logout.php">Logout</a>
             </div>
         </div>
     </div>
@@ -59,16 +59,14 @@
 <!-- Custom scripts for all pages-->
 <script src="public/js/sb-admin-2.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="public/js/demo/datatables-demo.js"></script>
+<script src="public/vendor/datatables/jquery.dataTables.min.js"></script>
 <!-- 
 <script src="./public/js/bootstrap-datepicker.js"></script>
 <script src="./public/js/jquery.timepicker.min.js"></script> -->
 <!-- Page level plugins -->
-<script src="public/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="public/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-<script src="public/js/demo/datatables-demo.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <script src="./public/js/ajax.js"></script>
 <script src="public/js/script.js"></script>

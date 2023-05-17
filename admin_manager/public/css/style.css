@@ -26,7 +26,7 @@
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 50%;
+    width: 60%;
     animation: translateY .5s ease-in-out;
 }
 
@@ -38,6 +38,11 @@
     font-weight: bold;
 }
 
+@media screen and (max-width: 1199.98px) {
+    .modal1 .modal-content {
+        width: 80%;
+    }
+}
 @media screen and (max-width: 768px) {
     .modal1 .modal-content {
         width: 90%;
