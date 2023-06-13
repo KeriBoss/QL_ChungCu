@@ -35,7 +35,7 @@ $layTatCaDuan = $ql_duan->layTatCaDuan();
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered custom-table" id="dataTable" width="max-content" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>STT</th>

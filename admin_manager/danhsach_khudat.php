@@ -32,12 +32,12 @@ $layTatCaDuan = $ql_duan->layTatCaDuan();
                                     <thead>
                                         <tr>
                                             <th width="5%">Mã khu đất</th>
-                                            <th>Tên khu đất</th>
-                                            <th>Loại nền trong khu</th>
-                                            <th>Hình minh họa</th>
-                                            <th>Diện tích(m<sup>2</sup>)</th>
+                                            <th width="10%">Tên khu đất</th>
+                                            <th width="10%">Loại nền trong khu</th>
+                                            <th width="15%">Hình minh họa</th>
+                                            <th width="10%">Diện tích(m<sup>2</sup>)</th>
                                             <th width="25%">Mô tả</th>
-                                            <th>Thuộc dự án</th>
+                                            <th width="10%">Thuộc dự án</th>
                                             <th width="5%"></th>
                                             <th width="5%"></th>
                                         </tr>

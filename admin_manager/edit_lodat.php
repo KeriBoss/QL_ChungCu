@@ -30,7 +30,7 @@ $layTatCaKhuDat = $dm_khudat->layTatCaKhuDat();
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="p-4 d-flex justify-content-start align-items-center">
-                        <form action="action/edit_lodat.php" method="post" class="w-75" enctype="multipart/form-data">
+                        <form action="action/edit_lodat.php" method="post" enctype="multipart/form-data">
                         <input type="number" name="lodat_id" value="<?=$id?>" hidden>
                             <div class="form-group">
                                 <label for="ten_lodat"><b>Tên lô đất:</b></label>

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__."./database.php";
+require_once "database.php";
 class QLDuAn extends Database{
     /**
      * Get all location
@@ -42,6 +42,14 @@ class QLDuAn extends Database{
     function layDuanTheoId($id){
         $sql = parent::$connection->prepare("Select * from ql_duan where id = ?");
         $sql->bind_param('i', $id);
+        return parent::select($sql);
+    }
+    /**
+     * 
+     */
+    function layNenDatTheoDuan($id_duan){
+        $sql = parent::$connection->prepare("SELECT *, dm_nendat.id as `ID_nendat` FROM ql_duan INNER JOIN dm_khudat ON ql_duan.id = dm_khudat.id_duan INNER JOIN dm_nendat ON dm_nendat.id_khudat = dm_khudat.id WHERE ql_duan.id = ?");
+        $sql->bind_param('i', $id_duan);
         return parent::select($sql);
     }
 }

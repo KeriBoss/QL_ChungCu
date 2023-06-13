@@ -1,6 +1,12 @@
 <?php
 include "./header.php";
+require_once '../model/hopdong.php';
+require_once '../model/hd_thanhly.php';
 
+$hopdong = new HopDong();
+$layTatCaHopDong = $hopdong->layTatCaHopDong();
+
+$thanhtoan = new HopDongThanhLy();
 
 ?>
                 <!-- Begin Page Content -->
@@ -9,7 +15,7 @@ include "./header.php";
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Danh Sách Hợp Đồng</h1>
-                        <a id="myBtn" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Thêm khu đất mới</a>
+                        <a href="./them_hopdong_1.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Thêm hợp đồng mới</a>
                     </div>
 
                     <!-- DataTales Example -->
@@ -19,10 +25,11 @@ include "./header.php";
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered custom-table" id="dataTable1" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th width="5%">Số HĐ</th>
+                                            <th>Số HĐ</th>
+                                            <th>Tình trạng</th>
                                             <th>Số PLHĐ</th>
                                             <th>Ngày ký</th>
                                             <th>Tên KH</th>
@@ -32,9 +39,7 @@ include "./header.php";
                                             <th>Đơn giá</th>
                                             <th>Diện tích HĐ</th>
                                             <th>Giá trị HĐ</th>
-                                            <th>Trạng thái</th>
                                             <th>Bộ phận</th>
-                                            <th>Hợp đồng mua bán</th>
                                             <th>Giao nền</th>
                                             <th>Vay ngân hàng</th>
                                             <th>Đơn giá TT</th>
@@ -44,63 +49,54 @@ include "./header.php";
                                             <th>Ký hiệu</th>
                                             <th>Công chứng</th>
                                             <th>Ngày nhận sổ</th>
-                                            <th width="5%"></th>
-                                            <th width="5%"></th>
+                                            <th>Chức năng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td></td>
-                                            <td>22/9/2023</td>
-                                            <td>Nguyễn Văn B</td>
-                                            <td>06</td>
-                                            <td>06</td>
-                                            <td>601</td>
-                                            <td>32.900,00</td>
-                                            <td>123</td>
-                                            <td>32.000.000,00</td>
-                                            <td>HĐ</td>
-                                            <td>PKD</td>
-                                            <td></td>
-                                            <td>Chưa</td>
-                                            <td></td>
-                                            <td>212300000</td>
-                                            <td>142300</td>
-                                            <td>212300000</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td>22/9/2023</td>
-                                            <td><a class="icon edit"><i class='bx bx-edit'></i></a></td>
-                                            <td><a onclick="if(CheckForm() == false) return false"  class="icon delete"><i class='bx bxs-message-square-x' ></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td></td>
-                                            <td>22/9/2023</td>
-                                            <td>Nguyễn Văn A</td>
-                                            <td>06</td>
-                                            <td>06</td>
-                                            <td>601</td>
-                                            <td>32.900,00</td>
-                                            <td>123</td>
-                                            <td>32.000.000,00</td>
-                                            <td>HĐ</td>
-                                            <td>PKD</td>
-                                            <td></td>
-                                            <td>Chưa</td>
-                                            <td></td>
-                                            <td>212300000</td>
-                                            <td>142300</td>
-                                            <td>212300000</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td>22/9/2023</td>
-                                            <td><a class="icon edit"><i class='bx bx-edit'></i></a></td>
-                                            <td><a onclick="if(CheckForm() == false) return false"  class="icon delete"><i class='bx bxs-message-square-x' ></i></a></td>
-                                        </tr>
+                                        <?php foreach($layTatCaHopDong as $item){ ?>
+                                            <tr>
+                                                <td><?=$item['so_hopdong']?></td>
+                                                <td>
+                                                    <?php
+                                                        $layTatCaHDThanhToanTheoHD = $thanhtoan->layTatCaHDThanhToanTheoHD($item['HD_id']);
+                                                    ?>
+                                                    <a href="danhsach_thanhtoan.php?id_hd=<?=$item['HD_id']?>" class="btn btn-payment">Chưa thanh lý</a>
+                                                </td>
+                                                <td></td>
+                                                <td><?=$item['ngaylap']?></td>
+                                                <td><?=$item['ten_kh']?></td>
+                                                <td><?=$item['ten_khudat']?></td>
+                                                <td><?=$item['ten_lodat']?></td>
+                                                <td><?=$item['ten_nendat']?></td>
+                                                <td><?=number_format($item['gia_hd'])?></td>
+                                                <td><?=$item['dientich_hd']?></td>
+                                                <td><?=number_format($item['gia_hd'] * $item['dientich_hd'])?></td>
+                                                <td><?=$item['ten_bophan']?></td>
+                                                <td>
+                                                    <?php 
+                                                    $currentDate = date('Y-m-d');
+                                                    if($currentDate < $item['ngay_giaodat']){
+                                                        echo "Chưa";
+                                                    }else{
+                                                        echo "Đã giao";
+                                                    }
+                                                    ?>
+                                                </td>
+                                                <td><?=$item['vay_nganhang']?></td>
+                                                <td><?=number_format($item['gia_thucte'])?></td>
+                                                <td><?=$item['dientich_thucte']?></td>
+                                                <td><?=number_format($item['gia_hd'] * $item['dientich_thucte'])?></td>
+                                                <td><?=$item['HD_ghichu']?></td>
+                                                <td><?=$item['HD_kyhieu']?></td>
+                                                <td><?=$item['congchung']?></td>
+                                                <td><?=$item['ngaygiao_sodo']?></td>
+                                                
+                                                <td>
+                                                    <a href="edit_hopdong.php?id=<?=$item['HD_id']?>" class="icon edit"><i class='bx bx-edit'></i></a>
+                                                    <a href="xoa_hopdong.php?id=<?=$item['HD_id']?>" onclick="if(CheckForm() == false) return false;" class="icon delete"><i class='bx bxs-message-square-x' ></i></a>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -113,7 +109,7 @@ include "./header.php";
                 <div id="newModal" class="modal1" data-display="false">
                     <!-- Modal content -->
                     <div class="modal-content">
-                        <form action="action/them_khudat.php" method="post" enctype="multipart/form-data">
+                        <form action="action/them_khudat.php" method="post" enctype="multipart/form-data" id="form-hopdong">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLongTitle">Thêm khu đất mới</h5>
                                 <button type="button" data-modal="close" class="close" >

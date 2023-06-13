@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__."./database.php";
+require_once "database.php";
 class DoanhMucNenDat extends Database{
     /**
      * lấy tất cả doanh mục lo đất

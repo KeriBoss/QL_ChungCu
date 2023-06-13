@@ -32,11 +32,11 @@ $layTatCaLoDat = $dm_lodat->layTatCaLoDat();
                                     <thead>
                                         <tr>
                                             <th width="5%">Mã lô đất</th>
-                                            <th>Tên lô đất</th>
-                                            <th>Hình minh họa</th>
-                                            <th>Diện tích(m<sup>2</sup>)</th>
+                                            <th width="10%">Tên lô đất</th>
+                                            <th width="15%">Hình minh họa</th>
+                                            <th width="10%">Diện tích(m<sup>2</sup>)</th>
                                             <th width="25%">Mô tả</th>
-                                            <th>Thuộc khu đất</th>
+                                            <th width="10%">Thuộc khu đất</th>
                                             <th width="5%"></th>
                                             <th width="5%"></th>
                                         </tr>

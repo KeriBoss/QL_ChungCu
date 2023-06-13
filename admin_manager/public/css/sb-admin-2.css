@@ -1485,7 +1485,8 @@ pre code {
 .table {
   width: 100%;
   margin-bottom: 1rem;
-  color: #858796;
+  /* color: #858796; */
+  color: #000000;
 }
 
 .table th,
@@ -11308,4 +11309,14 @@ form .parent{
 .group-flex{
   display: flex;
   gap: 10px;
+}
+table.table-bordered{
+  border:1px solid #a0a0a0;
+  margin-top:20px;
+}
+table.table-bordered > thead > tr > th{
+  border:1px solid #a0a0a0;
+}
+table.table-bordered > tbody > tr > td{
+  border:1px solid #a0a0a0;
 }

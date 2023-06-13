@@ -59,9 +59,73 @@
 table a.icon{
     font-size: 30px;
 }
+table tbody tr td{
+    white-space: nowrap!important;
+    vertical-align: middle!important;
+    max-width: 450px;
+    /* width: 200px; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .icon.edit{
     color: var(--primary);
 }
 .icon.delete{
     color: var(--danger);
+}
+table thead tr th{
+    color: var(--primary);
+}
+.custom-table thead tr th{
+    color: var(--primary);
+    min-width: 60px!important;
+}
+
+.custom-table thead tr th:first-child,
+.custom-table thead tr th:nth-last-child(2),
+.custom-table thead tr th:last-child{
+    min-width: max-content !important;
+    width: max-content !important;
+}
+/* .custom-table thead tr th:nth-last-child(11){
+    min-width: 150px!important;
+} */
+table tr{
+    text-align: center;
+}
+table thead tr th{
+    white-space: nowrap!important;
+    vertical-align: middle!important;
+}
+
+.card .card-body ul a{
+    padding: 10px 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.card .card-body ul a:hover{
+    text-decoration: none;
+}
+.card .card-body ul a.active{
+    color: #fff;
+    background: var(--primary);
+}
+.card .card-body ul li{
+    margin-bottom: 10px;
+}
+.btn-payment{
+    background-color: var(--light);
+    color: var(--green);
+    border: 1px solid var(--green);
+}
+.btn-payment:hover{
+    background-color: var(--green);
+    color: var(--light);
+    border: 1px solid var(--green);
+}
+.btn-payment.success{
+    background-color: var(--green);
+    color: var(--light);
+    pointer-events: none;
+    filter: saturate(0.5);
 }

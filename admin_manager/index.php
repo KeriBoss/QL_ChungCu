@@ -26,10 +26,10 @@ $layTatCaDuan = $ql_duan->layTatCaDuan();
                                     <thead>
                                         <tr>
                                             <th width="5%">Mã dự án</th>
-                                            <th>Tên dự án</th>
-                                            <th>Hình minh họa</th>
-                                            <th width="35%">Mô tả</th>
-                                            <th width="25%">Quy định xây dựng</th>
+                                            <th width="15%">Tên dự án</th>
+                                            <th width="15%">Hình minh họa</th>
+                                            <th width="20%">Mô tả</th>
+                                            <th width="20%">Quy định xây dựng</th>
                                             <th width="5%"></th>
                                             <th width="5%"></th>
                                         </tr>

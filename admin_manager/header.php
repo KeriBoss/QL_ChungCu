@@ -31,7 +31,7 @@ $target_dir = __DIR__ . "../public/img/du_an/";
     <link href="public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css"> -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- our project just needs Font Awesome Solid + Brands -->
@@ -41,6 +41,8 @@ $target_dir = __DIR__ . "../public/img/du_an/";
     <link href="public/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="public/css/sb-admin-2.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="./public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./public/css/now-ui-dashboard.minaa26.css"> -->
     <link href="public/css/style.css" rel="stylesheet">
 
 </head>
@@ -151,12 +153,26 @@ $target_dir = __DIR__ . "../public/img/du_an/";
                 </a>
                 <div id="collapseFive" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="./them_hopdong_1.php">Thêm hợp đồng 1</a>
-                        <a class="collapse-item" href="./them_hopdong_2.php">Thêm hợp đồng 2</a>
-                        <a class="collapse-item" href="./them_hopdong_3.php">Thêm hợp đồng 3</a>
+                        <a class="collapse-item" href="./them_hopdong_1.php">Thêm hợp đồng</a>
                     </div>
                 </div>
             </li>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
+                    aria-expanded="true" aria-controls="collapseSix">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Thông tin khách </span>
+                </a>
+                <div id="collapseSix" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="./danhsach_bophan.php">Danh sách bộ phận</a>
+                        <a class="collapse-item" href="./danhsach_nhamoigioi.php">Danh sách nhà môi giới</a>
+                    </div>
+                </div>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
             <!-- Heading -->
