@@ -1,15 +1,17 @@
 <?php
 include "./header.php";
+require_once '../model/hopdong.php';
+require_once '../model/hd_thanhly.php';
 
-
+$thanhly = new HopDongThanhLy();
+$layTatCaCongNo = $thanhly->layTatCaCongNo();
 ?>
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Danh Sách Công Nợ</h1>
-                        <a id="myBtn" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Thêm khu đất mới</a>
+                        <!-- <a id="myBtn" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Thêm khu đất mới</a> -->
                     </div>
 
                     <!-- DataTales Example -->
@@ -19,12 +21,13 @@ include "./header.php";
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered custom-table" id="dataTable" width="max-content" cellspacing="0">
+                                <table class="table table-bordered custom-table" id="dataTable1" width="max-content" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th width="5%">Số HĐ</th>
                                             <th>Ngày Ký</th>
-                                            <th>Tên và tên KH</th>
+                                            <th>TT thanh toán</th>
+                                            <th>Họ và tên KH</th>
                                             <th>Lô nền</th>
                                             <th>Diện tích HĐ</th>
                                             <th>Đơn giá HĐ</th>
@@ -35,45 +38,48 @@ include "./header.php";
                                             <th>Tổng thu</th>
                                             <th>Còn lại</th>
                                             <th>Ghi chú</th>
-                                            <th width="5%"></th>
-                                            <th width="5%"></th>
+                                            <!-- <th>Chức <br> năng</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php 
+                                            foreach($layTatCaCongNo as $item){
+                                        ?>
                                         <tr>
-                                            <td>1</td>
-                                            <td>22/9/2023</td>
-                                            <td>Nguyễn Văn A</td>
-                                            <td>06-06-601</td>
-                                            <td>120,00</td>
-                                            <td>32.900,00</td>
-                                            <td>32.000.000,00</td>
-                                            <td>123</td>
-                                            <td>12300</td>
-                                            <td>142300</td>
-                                            <td>212300000</td>
-                                            <td>00,00</td>
+                                            <td><?=$item['so_hopdong']?></td>
+                                            <td><?=$item['ngaylap']?></td>
+                                            <td>
+                                                <?php
+                                                $status = '';
+                                                $statusContent = "Đang tiến hành";
+                                                $urlSuccess = '';
+                                                $layTatCaHDThanhToanTheoHD = $thanhly->layTatCaHDThanhToanTheoHD($item['HD_id']);
+                                                $TOTAL_PAYMENT = 0;
+                                                foreach ($layTatCaHDThanhToanTheoHD as $data) {
+                                                    $TOTAL_PAYMENT += $data['tien_thanhly'];
+                                                }
+                                                if ($TOTAL_PAYMENT >= ($item['gia_hd'] * $item['dientich_thucte'])) {
+                                                    $status = 'success';
+                                                    $statusContent = "Đã thanh lý";
+                                                    $urlSuccess = '&success=true';
+                                                }
+                                                ?>
+                                                <a href="danhsach_thanhtoan.php?id_hd=<?= $item['HD_id'] ?><?= $urlSuccess ?>" class="btn btn-payment <?= $status ?>"><?= $statusContent ?></a>
+                                            </td>
+                                            <td><?=$item['ten_kh']?></td>
+                                            <td><?=$item['ten_khudat'] . '-' . $item['ten_lodat'] . '-' . $item['ten_nendat']?></td>
+                                            <td><?=$item['dientich_hd']?></td>
+                                            <td><?=$item['gia_hd']?></td>
+                                            <td><?=number_format($item['gia_hd'] * $item['dientich_hd'])?></td>
+                                            <td><?= $item['dientich_thucte'] ?></td>
+                                            <td><?= number_format($item['gia_thucte']) ?></td>
+                                            <td><?= number_format($item['gia_thucte'] * $item['dientich_thucte']) ?></td>
+                                            <td><?= number_format($thanhly->totalPayment($item['HD_id'])); ?></td>
+                                            <td><?=number_format(($item['gia_hd'] * $item['dientich_hd']) - ($thanhly->totalPayment($item['HD_id'])))?></td>
                                             <td></td>
-                                            <td><a class="icon edit"><i class='bx bx-edit'></i></a></td>
-                                            <td><a onclick="if(CheckForm() == false) return false"  class="icon delete"><i class='bx bxs-message-square-x' ></i></a></td>
+                                            <!-- <td><a onclick="if(CheckForm() == false) return false"  class="icon delete"><i class='bx bxs-message-square-x' ></i></a></td> -->
                                         </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>22/9/2023</td>
-                                            <td>Nguyễn Văn B</td>
-                                            <td>06-06-601</td>
-                                            <td>120,00</td>
-                                            <td>32.900,00</td>
-                                            <td>32.000.000,00</td>
-                                            <td>123</td>
-                                            <td>12300</td>
-                                            <td>142300</td>
-                                            <td>212300000</td>
-                                            <td>00,00</td>
-                                            <td></td>
-                                            <td><a class="icon edit"><i class='bx bx-edit'></i></a></td>
-                                            <td><a onclick="if(CheckForm() == false) return false"  class="icon delete"><i class='bx bxs-message-square-x' ></i></a></td>
-                                        </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>

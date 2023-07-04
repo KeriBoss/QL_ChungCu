@@ -13,5 +13,6 @@ try {
     $delete = $dm_khudat->delete($id);
     header('location: ../danhsach_khudat.php');
 } catch (Throwable $err) {
-    echo $err;
+    $_SESSION['error'] = $err;
+    header('location: ../404.php');
 }

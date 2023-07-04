@@ -61,6 +61,7 @@ if(isset($_POST['ten_duan']) && isset($_POST['mo_ta']) && isset($_POST['quy_dinh
         $insert = $ql_duan->insert($ten_duan, $image, $mo_ta, $quy_dinh);
         header('location: ../index.php');
     } catch(Throwable $err){
-        echo $err;
+        $_SESSION['error'] = $err;
+        header('location: ../404.php');
     }
 }

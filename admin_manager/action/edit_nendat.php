@@ -2,10 +2,10 @@
 session_start();
 require_once  "../../model/config.php";
 require_once "../../model/database.php";
-require_once  "../../model/dm_khudat.php";
+require_once  "../../model/dm_nendat.php";
 
 
-$target_dir =  "../public/img/khu_dat/";
+$target_dir =  "../public/img/nen_dat/";
 $target_name_file = basename($_FILES["image"]["name"]);
 
 if($target_name_file == ''){
@@ -56,18 +56,26 @@ if ($uploadOk == 0) {
     $image = $target_name_file;
 }
 
-if(isset($_POST['ten_khudat']) && isset($_POST['loai_nen']) && isset($_POST['dien_tich']) && isset($_POST['mo_ta']) && isset($_POST['id_duan'])){
-    $ten_khudat = $_POST['ten_khudat'];
-    $loai_nen = $_POST['loai_nen'];
-    $dien_tich = $_POST['dien_tich'];
+if(isset($_POST['ten_khudat']) && isset($_POST['ten_lodat']) && isset($_POST['ten_nen']) && isset($_POST['gia']) && isset($_POST['lo_gioi']) && isset($_POST['so_tang']) && isset($_POST['hien_trang']) && isset($_POST['id_hd']) && isset($_POST['mo_ta']) && isset($_POST['chieu_dai']) && isset($_POST['chieu_rong']) && isset($_POST['dien_tich']) && isset($_POST['dien_tich_xd']) && isset($_POST['id_nendat'])){
+    $id_khudat = $_POST['ten_khudat'];
+    $id_lodat = $_POST['ten_lodat'];
+    $ten_nendat = $_POST['ten_nen'];
+    $lo_gioi = $_POST['lo_gioi'];
+    $so_tang = $_POST['so_tang'];
+    $hien_trang = $_POST['hien_trang'];
+    $gia = $_POST['gia'];
+    $id_hd = $_POST['id_hd'];
     $mo_ta = $_POST['mo_ta'];
-    $id_duan = $_POST['id_duan'];
-    $khudat_id = $_POST['khudat_id'];
+    $chieu_dai = $_POST['chieu_dai'];
+    $chieu_rong = $_POST['chieu_rong'];
+    $dien_tich = $_POST['dien_tich'];
+    $dien_tich_xd = $_POST['dien_tich_xd'];
+    $id_nendat = $_POST['id_nendat'];
 
     try{
-        $dm_khudat = new DoanhMucKhuDat();
-        $update = $dm_khudat->update($khudat_id, $ten_khudat, $loai_nen,$image,$dien_tich,$mo_ta,$id_duan);
-        header('location: ../danhsach_khudat.php');
+        $dm_nendat = new DoanhMucNenDat();
+        $update = $dm_nendat->update($id_nendat,$id_khudat, $id_lodat, $ten_nendat, $lo_gioi, $chieu_dai,$chieu_rong,$dien_tich,$dien_tich_xd,$gia,$so_tang,$mo_ta,$image,$hien_trang,$id_hd);
+        header('location: ../danhsach_nendat.php');
     } catch(Throwable $err){
         $_SESSION['error'] = $err;
         header('location: ../404.php');

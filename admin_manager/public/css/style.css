@@ -29,6 +29,9 @@
     width: 60%;
     animation: translateY .5s ease-in-out;
 }
+.modal1.transfer .modal-content {
+    width: 70%;
+}
 
 /* The Close Button */
 .modal1 .close {
@@ -126,6 +129,35 @@ table thead tr th{
 .btn-payment.success{
     background-color: var(--green);
     color: var(--light);
-    pointer-events: none;
     filter: saturate(0.5);
+}
+.btn-transfer{
+    background-color: var(--light);
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    transition: all .2s;
+}
+.btn-transfer:hover{
+    background-color: var(--danger);
+    color: var(--light);
+    border: 1px solid var(--danger);
+}
+.btn-transfer.success{
+    background-color: var(--danger);
+    color: var(--light);
+    transition: all .2s;
+}
+.btn-transfer.success:hover{
+    background-color: var(--danger);
+    color: var(--light);
+    filter: saturate(0.5);
+}
+table{
+    scroll-snap-type: x mandatory;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+table td{
+    scroll-snap-align: start;
+    scroll-snap-type: start;
 }

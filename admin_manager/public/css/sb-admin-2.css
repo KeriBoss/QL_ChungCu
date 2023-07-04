@@ -11320,3 +11320,8 @@ table.table-bordered > thead > tr > th{
 table.table-bordered > tbody > tr > td{
   border:1px solid #a0a0a0;
 }
+@media screen and (max-width: 414.98px) {
+  .form-report,.card-body{
+    padding: 0;
+  }
+}

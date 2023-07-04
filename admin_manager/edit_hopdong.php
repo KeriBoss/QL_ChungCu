@@ -10,6 +10,11 @@ if(isset($_GET['id'])){
     $id_hd = $_GET['id'];
 }
 
+//Get contract to add to the contract addendum
+if(isset($_GET['transfer'])){
+    $transfer = $_GET['transfer'];
+}
+
 $duan = new QLDuAn;
 $layTatCaDuan = $duan->layTatCaDuan();
 
@@ -42,12 +47,12 @@ $layHopDongTheoID = $hopdong->layHopDongTheoID($id_hd);
                         </div>
                         <div class="card-body">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a class="active" data-toggle="tab" href="#home">Thông tin 1</a></li>
-                                <li><a data-toggle="tab" href="#menu1">Thông tin 2</a></li>
-                                <li><a data-toggle="tab" href="#menu2">Thông tin 3</a></li>
+                                <li class="active"><a class="active" data-toggle="tab" href="#home">Thông tin hợp đồng</a></li>
+                                <li><a data-toggle="tab" href="#menu1">Thông tin khách hàng</a></li>
                             </ul>
                             <form action="./action/edit_hopdong.php" method="post" id="form-hopdong" novalidate>
                                 <input type="number" name="id_hopdong" value="<?=$id_hd?>" hidden>
+                                <input type="text" name="transfer" value="<?php if(isset($transfer)){echo $transfer;} ?>" hidden>
                                 <div class="tab-content">
                                 <!--Card hopdong 1-->
                                     <div id="home" class="tab-pane fade in active show">
@@ -199,7 +204,7 @@ $layHopDongTheoID = $hopdong->layHopDongTheoID($id_hd);
                                                             <label>Nền đất:</label>
                                                         </div>
                                                         <div class="col-lg-9 col-md-9 col-12">
-                                                            <select id="nendat_id" name="nendat_id" class="form-control">
+                                                            <select id="nendat_id" data-page="edit" data-contract="<?=$id_hd?>" name="nendat_id" class="form-control">
                                                             </select>
                                                         </div>
                                                     </div>
@@ -326,9 +331,9 @@ $layHopDongTheoID = $hopdong->layHopDongTheoID($id_hd);
                                                             <?php foreach($layTatCaKhachHang as $item){ 
                                                                 if($item['id'] == $layHopDongTheoID[0]['id_khachhang']){
                                                                 ?>
-                                                                <option value="<?=$item['ID_kh']?>" selected><?=$item['ten_kh']?></option>
+                                                                <option value="<?=$item['id']?>" selected><?=$item['ten_kh']?></option>
                                                                 <?php }else{?>
-                                                                <option value="<?=$item['ID_kh']?>"><?=$item['ten_kh']?></option>
+                                                                <option value="<?=$item['id']?>"><?=$item['ten_kh']?></option>
                                                             <?php } }?>
                                                         </select>
                                                     </div>
@@ -370,50 +375,6 @@ $layHopDongTheoID = $hopdong->layHopDongTheoID($id_hd);
                                             </div>
                                         </div>
                                     </div>
-                                    <!--Card hopdong 3-->
-                                    <div id="menu2" class="tab-pane fade">
-                                        <div class="form-report border-2">
-                                            <div class="row mb-3">
-                                                <div class="col-lg-8 col-md-12 col-12">
-                                                    <div class="row mt-3 align-items-center">
-                                                        <div class="col-lg-3 col-md-12 col-12">
-                                                            Giai đoạn thứ:
-                                                        </div>
-                                                        <div class="col-lg-9 col-md-12 col-12">
-                                                            <input type="text" name="id_giaidoan" value="<?=$layHopDongTheoID[0]['id_giaidoan']?>" class="form-control" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mt-3 align-items-center">
-                                                        <div class="col-lg-3 col-md-12 col-12">
-                                                            Tên giai đoạn:
-                                                        </div>
-                                                        <div class="col-lg-9 col-md-12 col-12">
-                                                            <textarea name="ten_giaidoan" class="form-control" placeholder="Nhập tên giai đọan..." required><?=$layHopDongTheoID[0]['ten_giaidoan']?></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mt-3 align-items-center">
-                                                        <div class="col-lg-3 col-md-12 col-12">
-                                                            Tiền thanh lý:
-                                                        </div>
-                                                        <div class="col-lg-5 col-md-7 col-7">
-                                                            <input type="number" name="tien_hd" class="form-control" value="<?=$layHopDongTheoID[0]['tien_hd']?>" required>
-                                                        </div>
-                                                        <div class="col-lg-4 col-md-5 col-5">
-                                                            x 1000đ
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mt-3 align-items-center">
-                                                        <div class="col-lg-3 col-md-12 col-12">
-                                                            Ngày trả tiền:
-                                                        </div>
-                                                        <div class="col-lg-9 col-md-12 col-12">
-                                                            <input type="date" name="ngay_tratien" class="form-control" value="<?=$layHopDongTheoID[0]['ngay_tratien']?>" required>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <button type="submit" class="btn btn-primary">Lưu Chỉnh Sửa</button>
                                 </div>
                             </form>
@@ -422,13 +383,7 @@ $layHopDongTheoID = $hopdong->layHopDongTheoID($id_hd);
 
                 </div>
                 <!-- /.container-fluid -->
-                <!-- Modal -->
-                <div id="newModal" class="modal1" data-display="false">
-                    <!-- Modal content -->
-                    <div class="modal-content">
-                        <form action="action/them_khudat.php" method="post" enctype="multipart/form-data"></form>
-                    </div>
-                </div>
+
 <script>
     for (var i = 0; i < document.querySelectorAll('.typeHD-div').length; i++) {
         if (document.querySelectorAll('.typeHD-div')[i].value == '<?= $layHopDongTheoID[0]['loai_hopdong']; ?>') {

@@ -43,7 +43,12 @@
 
 <script type="text/javascript">
     function CheckForm() {
-        r = confirm("Ban co muon xoa khong?");
+        r = confirm("Bạn chắc chắn có muốn xóa?");
+        if (r == false) return false;
+        else return true;
+    }
+    function CheckContract() {
+        r = confirm("Bạn chắc chắn muốn xóa giải chấp cho hợp đồng này?");
         if (r == false) return false;
         else return true;
     }
@@ -62,6 +67,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="public/js/demo/datatables-demo.js"></script>
 <script src="public/vendor/datatables/jquery.dataTables.min.js"></script>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> -->
+<script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+      integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+
 <!-- 
 <script src="./public/js/bootstrap-datepicker.js"></script>
 <script src="./public/js/jquery.timepicker.min.js"></script> -->

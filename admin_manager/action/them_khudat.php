@@ -63,6 +63,7 @@ if(isset($_POST['ten_khudat']) && isset($_POST['loai_nen']) && isset($_POST['die
         $insert = $dm_khudat->insert($ten_khudat, $loai_nen,$image,$dien_tich,$mo_ta,$id_duan);
         header('location: ../danhsach_khudat.php');
     } catch(Throwable $err){
-        echo $err;
+        $_SESSION['error'] = $err;
+        header('location: ../404.php');
     }
 }

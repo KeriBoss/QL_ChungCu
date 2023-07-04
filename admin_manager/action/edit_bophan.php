@@ -17,6 +17,7 @@ if(isset($_POST['bophan_id']) && isset($_POST['ten_bophan']) && isset($_POST['ky
         $update = $bophan->update($bophan_id,$ten_bophan, $kyhieu, $phong,$ban);
         header('location: ../danhsach_bophan.php');
     } catch(Throwable $err){
-        echo $err;
+        $_SESSION['error'] = $err;
+        header('location: ../404.php');
     }
 }

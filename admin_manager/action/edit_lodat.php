@@ -68,6 +68,7 @@ if(isset($_POST['ten_lodat']) && isset($_POST['dien_tich']) && isset($_POST['mo_
         $update = $dm_lodat->update($lodat_id, $ten_lodat, $image,$dien_tich,$mo_ta,$id_khudat);
         header('location: ../danhsach_lodat.php');
     } catch(Throwable $err){
-        echo $err;
+        $_SESSION['error'] = $err;
+        header('location: ../404.php');
     }
 }

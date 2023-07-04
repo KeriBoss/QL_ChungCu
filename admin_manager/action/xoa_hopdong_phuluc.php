@@ -2,16 +2,16 @@
 session_start();
 require_once  "../../model/config.php";
 require_once "../../model/database.php";
-require_once  "../../model/dm_lodat.php";
+require_once  "../../model/hd_phuluc.php";
 
 if(isset($_GET['id'])){
     $id = $_GET['id'];
 }
 
-$dm_lodat = new DoanhMucLoDat();
+$hd_phuluc = new HopDongPhuLuc();
 try {
-    $delete = $dm_lodat->delete($id);
-    header('location: ../danhsach_lodat.php');
+    $delete = $hd_phuluc->delete($id);
+    header('location: ../danhsach_hopdong_phuluc.php');
 } catch (Throwable $err) {
     $_SESSION['error'] = $err;
     header('location: ../404.php');

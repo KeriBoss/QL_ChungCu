@@ -82,7 +82,7 @@ $layTatCaNMG = $nhamoigioi->layTatCaNMG();
                                         </div>
                                         <div class="col-lg-6 col-md-12 col-12">
                                         <label for="ten_bophan"><b>Số điện thoại:</b></label>
-                                            <input type="text" class="form-control" name="phone" placeholder="Nhập ..." required>
+                                            <input type="text" class="form-control" pattern="[0-9]{10,11}" name="phone" placeholder="Nhập ..." required>
                                         </div>
                                     </div>
                                 </div>

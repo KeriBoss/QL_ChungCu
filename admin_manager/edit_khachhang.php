@@ -35,36 +35,12 @@ $layKhachHangTheoId = $khachhang->layKhachHangTheoId($id);
                             <input type="number" name="id_kh" value="<?=$id?>" hidden>
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-lg-6 col-md-12 col-12">
+                                        <div class="col-lg-12 col-md-12 col-12">
                                             <label for="ten_khachhang"><b>Tên khách hàng:</b></label>
                                             <input type="text" class="form-control" name="ten_khachhang" value="<?=$layKhachHangTheoId[0]['ten_kh']?>" required>
                                         </div>
-                                        <div class="col-lg-6 col-md-12 col-12">
-                                            <label for="">Số HĐ</label>
-                                            <input type="number" name="so_hd" class="form-control" value="<?=$layKhachHangTheoId[0]['so_hd']?>">
-                                        </div>
                                     </div>
                                     
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-12">
-                                            <label for="id_duan"><b>Tên dự án:</b></label>
-                                            <select id="id_duan_kh" name="id_duan" class="form-control">
-                                                <?php foreach($layTatCaDuan as $item){ ?>
-                                                    <option class="duanDiv" value="<?=$item['id']?>"><?=$item['ten_duan']?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-12">
-                                            <label for="ten_nendat"><b>Tên nền đất:</b></label>
-                                            <select id="id_lodat_kh" name="ten_nendat" class="form-control">
-                                                <?php foreach($layTatCaNenDat as $item){ ?>
-                                                    <option class="nendatDiv" value="<?=$item['nendat_id']?>"><?=$item['ten_nendat']?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">

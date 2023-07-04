@@ -3,6 +3,7 @@ include "./header.php";
 require_once "../model/ql_duan.php";
 require_once "../model/dm_nendat.php";
 require_once "../model/khachhang.php";
+require_once "../model/hopdong.php";
 
 $ql_duan = new QLDuAn();
 $layTatCaDuan = $ql_duan->layTatCaDuan();
@@ -11,8 +12,10 @@ $nendat = new DoanhMucNenDat();
 $layTatCaNenDat = $nendat->layTatCaNenDat();
 
 $khachhang = new KhachHang();
-
 $layTatCaKhachHang = $khachhang->layTatCaKhachHang();
+
+$hopdong = new HopDong();
+$layTatCaHopDong = $hopdong->layTatCaHopDong();
 
 ?>
                 <!-- Begin Page Content -->
@@ -59,14 +62,40 @@ $layTatCaKhachHang = $khachhang->layTatCaKhachHang();
                                     <tbody>
                                         <?php 
                                         $count = 1;
-                                        foreach($layTatCaKhachHang as $item){ ?>
+                                        foreach($layTatCaKhachHang as $item){
+                                            $layHopDongTheoKhachhang = $hopdong->layHopDongTheoKhachhang($item['id']);
+                                            ?>
                                         <tr>
                                             <td><?=$count++?></td>
                                             <td><?=$item['ten_kh']?></td>
-                                            <td><?=$item['so_hd']?></td>
+                                            <td>
+                                                <?php 
+                                                if(count($layHopDongTheoKhachhang) > 0){
+                                                    echo $layHopDongTheoKhachhang[0]['so_hopdong'];
+                                                }else{
+                                                    echo "Trống";
+                                                }
+                                                ?>
+                                            </td>
                                             <td><?=$item['ma_phuluc']?></td>
-                                            <td><?=$item['ten_nendat']?></td>
-                                            <td><?=$item['ten_duan']?></td>
+                                            <td>
+                                                <?php
+                                                    if(count($layHopDongTheoKhachhang) > 0){
+                                                        echo $layHopDongTheoKhachhang[0]['ten_nendat'];
+                                                    }else{
+                                                        echo "Trống";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    if(count($layHopDongTheoKhachhang) > 0){
+                                                        echo $layHopDongTheoKhachhang[0]['ten_duan'];
+                                                    }else{
+                                                        echo "Trống";
+                                                    }
+                                                ?>
+                                            </td>
                                             <td><?=$item['namsinh']?></td>
                                             <td><?=$item['gioitinh']?></td>
                                             <td><?=$item['diachi']?></td>
@@ -81,8 +110,8 @@ $layTatCaKhachHang = $khachhang->layTatCaKhachHang();
                                             <td><?=$item['trangthai']?></td>
                                             <td><?=$item['nguoi_thanhtoan']?></td>
                                             <td>
-                                                <a href="edit_khachhang?id=<?=$item['ID_kh']?>" class="icon edit"><i class='bx bx-edit'></i></a>
-                                                <a href="action/xoa_khachhang.php?id=<?=$item['ID_kh']?>" onclick="if(CheckForm() == false) return false"  class="icon delete"><i class='bx bxs-message-square-x' ></i></a>
+                                                <a href="edit_khachhang?id=<?=$item['id']?>" class="icon edit"><i class='bx bx-edit'></i></a>
+                                                <a href="action/xoa_khachhang.php?id=<?=$item['id']?>" onclick="if(CheckForm() == false) return false"  class="icon delete"><i class='bx bxs-message-square-x' ></i></a>
                                             </td>
                                         </tr>
                                         <?php } ?>
@@ -108,36 +137,12 @@ $layTatCaKhachHang = $khachhang->layTatCaKhachHang();
                             <div class="modal-body">
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-lg-6 col-md-12 col-12">
+                                        <div class="col-lg-12 col-md-12 col-12">
                                             <label for="ten_khachhang"><b>Tên khách hàng:</b></label>
-                                            <input type="text" class="form-control" name="ten_khachhang" placeholder="Nhập ..." required>
-                                        </div>
-                                        <div class="col-lg-6 col-md-12 col-12">
-                                            <label for="">Số HĐ</label>
-                                            <input type="number" name="so_hd" class="form-control" placeholder="0">
+                                            <input type="text" class="form-control" name="ten_khachhang" placeholder="Nhập tên cty, khách hàng..." required>
                                         </div>
                                     </div>
                                     
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-12">
-                                            <label for="id_duan"><b>Tên dự án:</b></label>
-                                            <select id="id_duan_kh" name="id_duan" class="form-control">
-                                                <?php foreach($layTatCaDuan as $item){ ?>
-                                                    <option value="<?=$item['id']?>"><?=$item['ten_duan']?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-12">
-                                            <label for="ten_nendat"><b>Tên nền đất:</b></label>
-                                            <select id="id_lodat_kh" name="ten_nendat" class="form-control">
-                                                <?php foreach($layTatCaNenDat as $item){ ?>
-                                                    <option value="<?=$item['nendat_id']?>"><?=$item['ten_nendat']?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
@@ -159,7 +164,7 @@ $layTatCaKhachHang = $khachhang->layTatCaKhachHang();
                                         </div>
                                         <div class="col-lg-3 col-md-6 col-12">
                                             <label for="">Điện thoại</label>
-                                            <input type="text" name="phone" class="form-control" placeholder="Phone ..." required>
+                                            <input type="text" name="phone" pattern="[0-9]{10,11}" class="form-control" placeholder="Phone ..." required>
                                         </div>
                                     </div>
                                 </div>
@@ -179,7 +184,7 @@ $layTatCaKhachHang = $khachhang->layTatCaKhachHang();
                                     <div class="row">
                                         <div class="col-lg-3 col-md-6 col-12">
                                             <label for="">Số CMND:</label>
-                                            <input type="text" name="cmnd" class="form-control" placeholder="Nhập CMND..." required>
+                                            <input type="text" name="cmnd" class="form-control" pattern="[0-9]{9,11}" placeholder="Nhập CMND..." required>
                                         </div>
                                         <div class="col-lg-3 col-md-6 col-12">
                                             <label for="">Ngày cấp:</label>

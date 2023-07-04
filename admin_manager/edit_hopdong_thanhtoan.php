@@ -28,10 +28,10 @@ if(isset($_GET['id_hd']) && isset($_GET['id_thanhtoan'])){
                 </div>
 
                 <!-- DataTales Example -->
-                <div class="card shadow row mb-4">
+                <div class="card shadow row mb-4 pb-3">
                     <div class="col-lg-8 col-md-12 col-12">
-                        <form action="action/edit_khachhang.php" method="post" enctype="multipart/form-data">
-                            <input type="number" name="id_kh" value="<?=$id?>" hidden>
+                        <form action="action/edit_hopdong_thanhtoan.php" method="post" enctype="multipart/form-data">
+                            <input type="number" name="id_thanhtoan" value="<?=$id_thanhtoan?>" hidden>
                             <input type="number" name="id_hd" value="<?=$id_hd?>" hidden>
                                 <div class="row mt-3 align-items-center">
                                     <div class="col-lg-3 col-md-12 col-12">
@@ -56,7 +56,7 @@ if(isset($_GET['id_hd']) && isset($_GET['id_thanhtoan'])){
                                         Tiền thanh toán:
                                     </div>
                                     <div class="col-lg-5 col-md-7 col-7">
-                                        <input type="number" class="form-control" value="<?=$layTatCaThanhToanTheoId[0]['tien_thanhly']?>" name="tien_thanhly" min="1000000" max="100000000000" step="1" placeholder="> 1.000.000 và < 1.000.000.000.000">
+                                        <input type="number" class="form-control" value="<?=$layTatCaThanhToanTheoId[0]['tien_thanhly']?>" name="tien_thanhly" placeholder="0">
                                     </div>
                                     <div class="col-lg-4 col-md-5 col-5">
                                         x 1000đ
@@ -70,7 +70,18 @@ if(isset($_GET['id_hd']) && isset($_GET['id_thanhtoan'])){
                                         <input type="date" class="form-control" value="<?=$layTatCaThanhToanTheoId[0]['ngay_tratien']?>" name="ngay_tratien">
                                     </div>
                                 </div>
-                            <button type="submit" class="btn btn-primary">Lưu Trạng Thái</button>
+                                <div class="row mt-3 align-items-center">
+                                    <div class="col-lg-3 col-md-12 col-12">
+                                        Tình trạng:
+                                    </div>
+                                    <div class="col-lg-5 col-md-12 col-12">
+                                        <select name="status" class="form-control">
+                                            <option class="statusDiv" value="Chưa thanh toán">Chưa thanh toán</option>
+                                            <option class="statusDiv" value="Đã thanh toán">Đã thanh toán</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            <button type="submit" class="btn btn-primary float-right">Lưu Trạng Thái</button>
                         </form>
                     </div>
                 </div>
@@ -79,13 +90,12 @@ if(isset($_GET['id_hd']) && isset($_GET['id_thanhtoan'])){
             </div>
             <!-- End of Main Content -->
 <script>
-    for (var i = 0; i < document.querySelectorAll('.duanDiv').length; i++) {
-        if (document.querySelectorAll('.duanDiv')[i].value == '<?= $layKhachHangTheoId[0]['id_duan']; ?>') {
-            document.querySelectorAll('.duanDiv')[i].selected = true;
+    for (var i = 0; i < document.querySelectorAll('.statusDiv').length; i++) {
+        if (document.querySelectorAll('.statusDiv')[i].value == '<?= $layTatCaThanhToanTheoId[0]['status']; ?>') {
+            document.querySelectorAll('.statusDiv')[i].selected = true;
             break;
         }
     }
-    let ID_NENDAT = <?= $layKhachHangTheoId[0]['id_nendat']; ?>;
 </script>
 <?php
 include_once './footer.php';

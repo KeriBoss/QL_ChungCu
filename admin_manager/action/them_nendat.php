@@ -67,10 +67,12 @@ if(isset($_POST['ten_khudat']) && isset($_POST['ten_lodat']) && isset($_POST['te
 
     try{
         $dm_nendat = new DoanhMucNenDat();
+        die();
         $insert = $dm_nendat->insert($ten_khudat,$ten_lodat,$ten_nen,$lo_gioi,$chieu_dai,$chieu_rong,$dien_tich,$dien_tich_xd,$gia,$so_tang,$mo_ta,$image,$hien_trang,$id_hd);
 
         header('location: ../danhsach_nendat.php');
     } catch(Throwable $err){
-        echo $err;
+        $_SESSION['error'] = $err;
+        header('location: ../404.php');
     }
 }

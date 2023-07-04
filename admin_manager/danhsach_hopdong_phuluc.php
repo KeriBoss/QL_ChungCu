@@ -1,6 +1,14 @@
 <?php
 include "./header.php";
+require_once '../model/hopdong.php';
+require_once '../model/hd_phuluc.php';
+require_once '../model/khachhang.php';
 
+$phuluc = new HopDongPhuLuc();
+$layTatCaHopDongPL = $phuluc->layTatCaHopDongPL();
+
+$khachhang = new KhachHang();
+$layTatCaKhachHang = $khachhang->layTatCaKhachHang();
 
 ?>
                 <!-- Begin Page Content -->
@@ -9,95 +17,76 @@ include "./header.php";
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Danh Sách Hợp Đồng Phụ Lục</h1>
-                        <a id="myBtn" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Thêm khu đất mới</a>
+                        <!-- <a id="myBtn" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Thêm khu đất mới</a> -->
                     </div>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered custom-table" id="dataTable" width="max-content" cellspacing="0">
+                                <table class="table table-bordered custom-table" id="dataTable1" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th width="5%">Số HĐ</th>
-                                            <th>Số PLHĐ</th>
-                                            <th>Ngày ký</th>
-                                            <th>Tên KH</th>
-                                            <th>Khu</th>
-                                            <th>Lô</th>
-                                            <th>Nền</th>
-                                            <th>Đơn giá</th>
-                                            <th>Diện tích HĐ</th>
-                                            <th>Giá trị HĐ</th>
-                                            <th>Trạng thái</th>
-                                            <th>Bộ phận</th>
-                                            <th>Hợp đồng mua bán</th>
-                                            <th>Giao nền</th>
-                                            <th>Vay ngân hàng</th>
-                                            <th>Đơn giá TT</th>
-                                            <th>Diện tích TT</th>
-                                            <th>Giá trị TT</th>
-                                            <th>Ghi chú</th>
-                                            <th>Ký hiệu</th>
-                                            <th>Công chứng</th>
-                                            <th>Ngày nhận sổ</th>
-                                            <th width="5%"></th>
-                                            <th width="5%"></th>
+                                        <th>Chức <br> năng</th>
+                                        <th>Số <br> HĐ</th>
+                                        <th>Số PLHĐ</th>
+                                        <th>Ngày ký</th>
+                                        <th>Tên KH</th>
+                                        <th>Khu</th>
+                                        <th>Lô</th>
+                                        <th>Nền</th>
+                                        <th>Đơn giá</th>
+                                        <th>Diện tích HĐ</th>
+                                        <th>Giá trị HĐ</th>
+                                        <th>Bộ phận</th>
+                                        <th>Giao nền</th>
+                                        <th>Vay ngân hàng</th>
+                                        <th>Đơn giá TT</th>
+                                        <th>Diện tích TT</th>
+                                        <th>Giá trị TT</th>
+                                        <th>Ghi chú</th>
+                                        <th>Ký hiệu</th>
+                                        <th>Công chứng</th>
+                                        <th>Ngày nhận sổ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td></td>
-                                            <td>22/9/2023</td>
-                                            <td>Nguyễn Văn B</td>
-                                            <td>06</td>
-                                            <td>06</td>
-                                            <td>601</td>
-                                            <td>32.900,00</td>
-                                            <td>123</td>
-                                            <td>32.000.000,00</td>
-                                            <td>HĐ</td>
-                                            <td>PKD</td>
-                                            <td></td>
-                                            <td>Chưa</td>
-                                            <td></td>
-                                            <td>212300000</td>
-                                            <td>142300</td>
-                                            <td>212300000</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td>22/9/2023</td>
-                                            <td><a class="icon edit"><i class='bx bx-edit'></i></a></td>
-                                            <td><a onclick="if(CheckForm() == false) return false"  class="icon delete"><i class='bx bxs-message-square-x' ></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td></td>
-                                            <td>22/9/2023</td>
-                                            <td>Nguyễn Văn A</td>
-                                            <td>06</td>
-                                            <td>06</td>
-                                            <td>601</td>
-                                            <td>32.900,00</td>
-                                            <td>123</td>
-                                            <td>32.000.000,00</td>
-                                            <td>HĐ</td>
-                                            <td>PKD</td>
-                                            <td></td>
-                                            <td>Chưa</td>
-                                            <td></td>
-                                            <td>212300000</td>
-                                            <td>142300</td>
-                                            <td>212300000</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td>22/9/2023</td>
-                                            <td><a class="icon edit"><i class='bx bx-edit'></i></a></td>
-                                            <td><a onclick="if(CheckForm() == false) return false"  class="icon delete"><i class='bx bxs-message-square-x' ></i></a></td>
-                                        </tr>
+                                    <?php foreach ($layTatCaHopDongPL as $item) { ?>
+                                            <tr>
+                                                <td>
+                                                    <a href="action/xoa_hopdong_phuluc.php?id=<?= $item['HD_id'] ?>" onclick="if(CheckForm() == false) return false;" class="icon delete"><i class='bx bxs-message-square-x'></i></a>
+                                                </td>
+                                                <td><?= $item['so_hopdong'] ?></td>
+                                                <td></td>
+                                                <td><?= $item['ngaylap'] ?></td>
+                                                <td><?= $item['ten_kh'] ?></td>
+                                                <td><?= $item['ten_khudat'] ?></td>
+                                                <td><?= $item['ten_lodat'] ?></td>
+                                                <td><?= $item['ten_nendat'] ?></td>
+                                                <td><?= number_format($item['gia_hd']) ?></td>
+                                                <td><?= $item['dientich_hd'] ?></td>
+                                                <td><?= number_format($item['gia_hd'] * $item['dientich_hd']) ?></td>
+                                                <td><?= $item['ten_bophan'] ?></td>
+                                                <td>
+                                                    <?php
+                                                    $currentDate = date('Y-m-d');
+                                                    if ($currentDate < $item['ngay_giaodat']) {
+                                                        echo "Chưa";
+                                                    } else {
+                                                        echo "Đã giao";
+                                                    }
+                                                    ?>
+                                                </td>
+                                                <td><?= $item['vay_nganhang'] ?></td>
+                                                <td><?= number_format($item['gia_thucte']) ?></td>
+                                                <td><?= $item['dientich_thucte'] ?></td>
+                                                <td><?= number_format($item['gia_hd'] * $item['dientich_thucte']) ?></td>
+                                                <td><?= $item['HD_ghichu'] ?></td>
+                                                <td><?= $item['HD_kyhieu'] ?></td>
+                                                <td><?= $item['congchung'] ?></td>
+                                                <td><?= $item['ngaygiao_sodo'] ?></td>
+                                            </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>

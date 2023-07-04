@@ -18,9 +18,8 @@ $layHopDongTheoID = $hopdong->layHopDongTheoID($id_hd);
 $TOTAL_PAYMENT = 0;
 $TOTAL_THANHLY = 0;
 foreach($layTatCaHDThanhToanTheoHD as $items){
-    if($items['status'] == "Đã thanh toán")
     $TOTAL_PAYMENT += $items['tien_thanhly'];
-    $TOTAL_THANHLY = $items['gia_hd'] * $items['dientich_hd'];
+    $TOTAL_THANHLY = $items['gia_hd'] * $items['dientich_thucte'];
 }
 
 ?>
@@ -46,14 +45,13 @@ foreach($layTatCaHDThanhToanTheoHD as $items){
                                     <thead>
                                         <tr>
                                             <th>STT</th>
-                                            <th>Chức năng</th>
                                             <th>Số HĐ</th>
                                             <th>Tên khách hàng</th>
                                             <th>Giai đoạn</th>
                                             <th>Tên giai đoạn</th>
                                             <th>Tiền thanh toán</th>
                                             <th>Ngày trả tiền</th>
-                                            <th>Trạng thái</th>
+                                            <th>Chức năng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -63,10 +61,6 @@ foreach($layTatCaHDThanhToanTheoHD as $items){
                                         ?>
                                             <tr>
                                                 <td><?=$count++?></td>
-                                                <td>
-                                                    <a href="edit_hopdong_thanhtoan.php?id_hd=<?=$id_hd?>&id_thanhtoan=<?=$item['ID_thanhtoan']?>" class="icon edit"><i class='bx bx-edit'></i></a>
-                                                    <a href="action/xoa_thanhtoan_hopdong.php?id_hd=<?=$id_hd?>&id_thanhtoan=<?=$item['ID_thanhtoan']?>" onclick="if(CheckForm() == false) return false;" class="icon delete"><i class='bx bxs-message-square-x' ></i></a>
-                                                </td>
                                                 <td><?=$item['so_hopdong']?></td>
                                                 <td><?=$item['ten_kh']?></td>
                                                 <td><?=$item['giaidoan']?></td>
@@ -74,19 +68,9 @@ foreach($layTatCaHDThanhToanTheoHD as $items){
                                                 <td><?=number_format($item['tien_thanhly'])?></td>
                                                 <td><?=$item['ngay_tratien']?></td>
                                                 <td>
-                                                <?php
-                                                    $status = '';
-                                                    $statusContent = "Chưa thanh toán";
-                                                    
-                                                    if ($item['status'] == "Đã thanh toán") {
-                                                        $status = 'success';
-                                                        $statusContent = "Đã thanh toán";
-                                                        $urlSuccess = '&success=true';
-                                                    }
-                                                    ?>
-                                                    <a class="btn btn-payment <?= $status ?>"><?= $statusContent ?></a>
+                                                    <a href="edit_hopdong_thanhtoan.php?id_hd=<?=$id_hd?>&id_thanhtoan=<?=$item['ID_thanhtoan']?>" class="icon edit"><i class='bx bx-edit'></i></a>
+                                                    <a href="action/xoa_thanhtoan_hopdong.php?id_hd=<?=$id_hd?>&id_thanhtoan=<?=$item['ID_thanhtoan']?>" onclick="if(CheckForm() == false) return false;" class="icon delete"><i class='bx bxs-message-square-x' ></i></a>
                                                 </td>
-                                                
                                             </tr>
                                         <?php } ?>
                                     </tbody>
@@ -136,7 +120,7 @@ foreach($layTatCaHDThanhToanTheoHD as $items){
                                         Tiền thanh toán:
                                     </div>
                                     <div class="col-lg-5 col-md-7 col-7">
-                                        <input type="number" class="form-control" name="tien_thanhly"  placeholder="0">
+                                        <input type="number" class="form-control" name="tien_thanhly" min="1000000" placeholder="> 1.000.000">
                                     </div>
                                     <div class="col-lg-4 col-md-5 col-5">
                                         x 1000đ
@@ -146,19 +130,8 @@ foreach($layTatCaHDThanhToanTheoHD as $items){
                                     <div class="col-lg-3 col-md-12 col-12">
                                         Ngày trả tiền:
                                     </div>
-                                    <div class="col-lg-4 col-md-12 col-12">
+                                    <div class="col-lg-9 col-md-12 col-12">
                                         <input type="date" class="form-control" name="ngay_tratien">
-                                    </div>
-                                </div>
-                                <div class="row mt-3 align-items-center">
-                                    <div class="col-lg-3 col-md-12 col-12">
-                                        Tình trạng:
-                                    </div>
-                                    <div class="col-lg-5 col-md-12 col-12">
-                                        <select name="status" class="form-control">
-                                            <option value="Chưa thanh toán" selected>Chưa thanh toán</option>
-                                            <option value="Đã thanh toán">Đã thanh toán</option>
-                                        </select>
                                     </div>
                                 </div>
                             </div>

@@ -14,6 +14,43 @@ const formatter = new Intl.NumberFormat('vi-VN', {
     //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
 });
 
+window.addEventListener('load', function(event){
+    if(khudat){
+        event.preventDefault();
+        let khudat_id = khudat.value;
+        $.ajax({
+            url: 'ajax_get_lodat.php',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                khudat_id: khudat_id
+            }
+        }).done(function (reponse) {
+            lodat.innerHTML = ``;
+            reponse.forEach(item => {
+                lodat.innerHTML += `
+                    <option class="nendatDiv" value="${item['lodat_id']}">${item['ten_lodat']}</option>
+                `
+            });
+            if(reponse.length > 0){
+                ten_duan.value = reponse[0]['ten_duan'];
+                if(typeof ID_KHUDAT != 'undefined' && ID_KHUDAT > 0){
+
+                    for (var i = 0; i < document.querySelectorAll('.nendatDiv').length; i++) {
+                        if (document.querySelectorAll('.nendatDiv')[i].value == ID_KHUDAT) {
+                            document.querySelectorAll('.nendatDiv')[i].selected = true;
+                            // break;
+                        }
+                    }
+                }
+            }else{
+                ten_duan.value = '';
+            }
+        });
+    }
+})
+
+
 if(khudat){
     khudat.addEventListener('change', function(event){
         event.preventDefault();
@@ -30,7 +67,7 @@ if(khudat){
             lodat.innerHTML = ``;
             reponse.forEach(item => {
                 lodat.innerHTML += `
-                    <option value="${item['id']}">${item['ten_lodat']}</option>
+                <option class="nendatDiv" value="${item['lodat_id']}">${item['ten_lodat']}</option>
                 `
             });
             if(reponse.length > 0){
@@ -42,53 +79,33 @@ if(khudat){
     })
 }
 
-if(lodat){
-    lodat.addEventListener('change', function(event){
-        event.preventDefault();
-        let lodat_id = lodat.value;
+// if(lodat){
+//     lodat.addEventListener('change', function(event){
+//         event.preventDefault();
+//         let lodat_id = lodat.value;
         
-        $.ajax({
-            url: 'ajax_get_khudat.php',
-            type: 'GET',
-            dataType: 'json',
-            data: {
-                lodat_id: lodat_id
-            }
-        }).done(function (reponse) {
-            khudat.innerHTML = ``;
-            reponse.forEach(item => {
-                khudat.innerHTML += `
-                    <option value="${item['khudat_id']}">${item['ten_khudat']}</option>
-                `
-            });
-            if(reponse.length > 0){
-                ten_duan.value = reponse[0]['ten_duan'];
-            }else{
-                ten_duan.value = '';
-            }
-        });
-    })
-}
-
-window.addEventListener('load', function(event){
-    if(khudat){
-        let khudat_id = khudat.value;
-        $.ajax({
-            url: 'ajax_get_lodat.php',
-            type: 'GET',
-            dataType: 'json',
-            data: {
-                khudat_id: khudat_id
-            }
-        }).done(function (reponse) {
-            if(reponse.length > 0){
-                ten_duan.value = reponse[0]['ten_duan'];
-            }else{
-                ten_duan.value = '';
-            }
-        });
-    }
-})
+//         $.ajax({
+//             url: 'ajax_get_khudat.php',
+//             type: 'GET',
+//             dataType: 'json',
+//             data: {
+//                 lodat_id: lodat_id
+//             }
+//         }).done(function (reponse) {
+//             khudat.innerHTML = ``;
+//             reponse.forEach(item => {
+//                 khudat.innerHTML += `
+//                     <option value="${item['khudat_id']}">${item['ten_khudat']}</option>
+//                 `
+//             });
+//             if(reponse.length > 0){
+//                 ten_duan.value = reponse[0]['ten_duan'];
+//             }else{
+//                 ten_duan.value = '';
+//             }
+//         });
+//     })
+// }
 
 const id_duan_kh = document.getElementById('id_duan_kh');
 const id_lodat_kh = document.getElementById('id_lodat_kh');
@@ -125,7 +142,6 @@ function getNendatByDuan(){
             if(typeof ID_NENDAT != 'undefined' && ID_NENDAT > 0){
                 
                 for (var i = 0; i < document.querySelectorAll('.nendatDiv').length; i++) {
-                    console.log(document.querySelectorAll('.nendatDiv')[i]);
                     if (document.querySelectorAll('.nendatDiv')[i].value == ID_NENDAT) {
                         document.querySelectorAll('.nendatDiv')[i].selected = true;
                         // break;
@@ -149,15 +165,24 @@ if(change_duan){
 
 function getIDDuan(){
     var id_duan = change_duan.value;
+    var nendat_id = document.getElementById('nendat_id');
+    var page = '';
+    var id_hd = '';
+
+    if(nendat_id.dataset.page === "edit"){
+        page = "edit";
+        id_hd = nendat_id.dataset.contract;
+    }
     $.ajax({
         url: 'ajax_get_nendat.php',
         type: 'GET',
         dataType: 'json',
         data: {
-            id_duan: id_duan
+            id_duan: id_duan,
+            page: page,
+            id_hd: id_hd
         }
     }).done(function (reponse) {
-        var nendat_id = document.getElementById('nendat_id');
         if(nendat_id){
             nendat_id.innerHTML = ``;
             reponse.forEach(item => {

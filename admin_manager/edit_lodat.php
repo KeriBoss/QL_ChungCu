@@ -84,6 +84,9 @@ $layTatCaKhuDat = $dm_khudat->layTatCaKhuDat();
                 }
                 reader.readAsDataURL(files[0]);
         }
+
+
+
     </script>
 <?php
 include "./footer.php";

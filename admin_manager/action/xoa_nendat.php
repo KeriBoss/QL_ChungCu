@@ -2,16 +2,16 @@
 session_start();
 require_once  "../../model/config.php";
 require_once "../../model/database.php";
-require_once  "../../model/dm_lodat.php";
+require_once  "../../model/dm_nendat.php";
 
 if(isset($_GET['id'])){
     $id = $_GET['id'];
 }
 
-$dm_lodat = new DoanhMucLoDat();
+$dm_nendat = new DoanhMucNenDat();
 try {
-    $delete = $dm_lodat->delete($id);
-    header('location: ../danhsach_lodat.php');
+    $delete = $dm_nendat->delete($id);
+    header('location: ../danhsach_nendat.php');
 } catch (Throwable $err) {
     $_SESSION['error'] = $err;
     header('location: ../404.php');

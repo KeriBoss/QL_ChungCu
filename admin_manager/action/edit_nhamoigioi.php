@@ -19,6 +19,7 @@ if(isset($_POST['id_nmg']) && isset($_POST['ten_nmg']) && isset($_POST['phone'])
         $update = $nhamoigioi->update($id_nmg,$ten_nmg, $phone, $diachi,$email,$gioitinh,$chucvu);
         header('location: ../danhsach_nhamoigioi.php');
     } catch(Throwable $err){
-        echo $err;
+        $_SESSION['error'] = $err;
+        header('location: ../404.php');
     }
 }

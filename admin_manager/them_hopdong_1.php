@@ -34,8 +34,8 @@ $layTatCaKhachHang = $khachhang->layTatCaKhachHang();
                         </div>
                         <div class="card-body">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a class="active" data-toggle="tab" href="#home">Thông tin 1</a></li>
-                                <li><a data-toggle="tab" href="#menu1">Thông tin 2</a></li>
+                                <li class="active"><a class="active" data-toggle="tab" href="#home">Thông tin hợp đồng</a></li>
+                                <li><a data-toggle="tab" href="#menu1">Thông tin khách hàng</a></li>
                                 <!-- <li><a data-toggle="tab" href="#menu2">Thông tin 3</a></li> -->
                             </ul>
                             <form action="./action/them_hopdong_main.php" id="form-hopdong" method="post" novalidate>
@@ -51,9 +51,7 @@ $layTatCaKhachHang = $khachhang->layTatCaKhachHang();
                                                         </div>
                                                         <div class="col-lg-9 col-md-9 col-12">
                                                             <select name="type_hopdong" class="form-control" required>
-                                                                <option value="1">Hợp đồng</option>
-                                                                <option value="2">Hợp đồng thanh lý</option>
-                                                                <option value="3">Hợp đồng phụ lục</option>
+                                                                <option value="1">Hợp đồng chính thức</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -94,7 +92,7 @@ $layTatCaKhachHang = $khachhang->layTatCaKhachHang();
                                                             <label>Tiền môi giới:</label>
                                                         </div>
                                                         <div class="col-lg-9 col-md-9 col-12">
-                                                            <input type="number" class="form-control" name="tien_moigioi" placeholder="0.00" required>
+                                                            <input type="number" data-type="price" class="form-control" name="tien_moigioi" placeholder="0.00" required>
                                                         </div>
                                                     </div>
                                                     <div class="row align-items-center mb-3">
@@ -187,7 +185,7 @@ $layTatCaKhachHang = $khachhang->layTatCaKhachHang();
                                                             <label>Giá đất:</label>
                                                         </div>
                                                         <div class="col-lg-5 col-md-8 col-7">
-                                                            <input type="number" class="form-control" name="gia_dat" placeholder="0.00" required>
+                                                            <input type="number" data-type="price" class="form-control" name="gia_dat" placeholder="0.00" required>
                                                         </div>
                                                         <div class="col-lg-4 col-md-4 col-5">
                                                             x 1000đ/m <sup>2</sup>
@@ -198,7 +196,7 @@ $layTatCaKhachHang = $khachhang->layTatCaKhachHang();
                                                             <label>Giá hợp đồng:</label>
                                                         </div>
                                                         <div class="col-lg-5 col-md-5 col-7">
-                                                            <input id="gia_hd" type="number" class="form-control" name="gia_hopdong" placeholder="0.00" required>
+                                                            <input id="gia_hd" type="number" data-type="price" class="form-control" name="gia_hopdong" placeholder="0.00" required>
                                                         </div>
                                                         <div class="col-lg-4 col-md-4 col-5">
                                                             x 1000đ/m <sup>2</sup>(a)
@@ -231,7 +229,7 @@ $layTatCaKhachHang = $khachhang->layTatCaKhachHang();
                                                             <label><b>Trị giá hợp đồng:</b></label>
                                                         </div>
                                                         <div class="col-lg-5 col-md-5 col-7">
-                                                            <input id="trigia_hd" type="number" class="form-control" name="trigia_hd" disabled>
+                                                            <input id="trigia_hd" type="text" data-type="price" class="form-control" name="trigia_hd" disabled>
                                                         </div>
                                                         <div class="col-lg-4 col-md-4 col-5">
                                                             <b> x 1000 VND (a*b)</b>
@@ -253,7 +251,7 @@ $layTatCaKhachHang = $khachhang->layTatCaKhachHang();
                                                             <label>Giá thực tế:</label>
                                                         </div>
                                                         <div class="col-lg-5 col-md-5 col-7">
-                                                            <input id="gia_thucte" name="gia_thucte" type="number" class="form-control" placeholder="0.00" required>
+                                                            <input id="gia_thucte" name="gia_thucte" type="number" data-type="price" class="form-control" placeholder="0.00" required>
                                                         </div>
                                                         <div class="col-lg-4 col-md-4 col-5">
                                                             x 1000đ/m<sup>2</sup>(c)
@@ -293,6 +291,7 @@ $layTatCaKhachHang = $khachhang->layTatCaKhachHang();
                                                 </div>
                                             </div>
                                         </div>
+                                        <button id="next-info" type="button" class="float-right btn btn-primary">Tiếp <i class='bx bx-right-arrow-alt'></i></button>
                                     </div>
                                     <!--Card hopdong 2-->
                                     <div id="menu1" class="tab-pane fade">
@@ -303,7 +302,7 @@ $layTatCaKhachHang = $khachhang->layTatCaKhachHang();
                                                         <label for="">Chọn khách hàng: </label>
                                                         <select id="id_khachhang" name="id_khachhang" class="form-control w-50 ml-3">
                                                             <?php foreach($layTatCaKhachHang as $item){ ?>
-                                                                <option value="<?=$item['ID_kh']?>"><?=$item['ten_kh']?></option>
+                                                                <option value="<?=$item['id']?>"><?=$item['ten_kh']?></option>
                                                             <?php } ?>
                                                         </select>
                                                     </div>
@@ -350,51 +349,7 @@ $layTatCaKhachHang = $khachhang->layTatCaKhachHang();
                                         </div>
                                         <button type="submit" class="btn btn-primary">Thêm hợp đồng</button>
                                     </div>
-                                    <!--Card hopdong 3-->
-                                    <!-- <div id="menu2" class="tab-pane fade">
-                                        <div class="form-report border-2">
-                                            <div class="row mb-3">
-                                                <div class="col-lg-8 col-md-12 col-12">
-                                                    <div class="row mt-3 align-items-center">
-                                                        <div class="col-lg-3 col-md-12 col-12">
-                                                            Giai đoạn thứ:
-                                                        </div>
-                                                        <div class="col-lg-9 col-md-12 col-12">
-                                                            <input type="text" name="id_giaidoan" value="1" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mt-3 align-items-center">
-                                                        <div class="col-lg-3 col-md-12 col-12">
-                                                            Tên giai đoạn:
-                                                        </div>
-                                                        <div class="col-lg-9 col-md-12 col-12">
-                                                            <textarea name="ten_giaidoan" class="form-control" placeholder="Nhập tên giai đọan..."></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mt-3 align-items-center">
-                                                        <div class="col-lg-3 col-md-12 col-12">
-                                                            Tiền thanh toán:
-                                                        </div>
-                                                        <div class="col-lg-5 col-md-7 col-7">
-                                                            <input type="number" name="tien_hd" class="form-control">
-                                                        </div>
-                                                        <div class="col-lg-4 col-md-5 col-5">
-                                                            x 1000đ
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mt-3 align-items-center">
-                                                        <div class="col-lg-3 col-md-12 col-12">
-                                                            Ngày trả tiền:
-                                                        </div>
-                                                        <div class="col-lg-9 col-md-12 col-12">
-                                                            <input type="date" name="ngay_tratien" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Thêm hợp đồng</button>
-                                    </div> -->
+                                    
                                 </div>
                             </form>
                         </div>

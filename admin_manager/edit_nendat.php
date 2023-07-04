@@ -11,13 +11,14 @@ if(isset($_GET['id'])){
 }
 //Created new type of product
 $dm_lodat = new DoanhMucLoDat();
-$layLoDatTheoId = $dm_lodat->layLoDatTheoId($id );
+$layTatCaLoDat = $dm_lodat->layTatCaLoDat();
 
 $dm_khudat = new DoanhMucKhuDat();
 $layTatCaKhuDat = $dm_khudat->layTatCaKhuDat();
 
 $dm_nendat = new DoanhMucNenDat();
 $layNenDatTheoId = $dm_nendat->layNenDatTheoId($id);
+// var_dump($layTatCaLoDat[0]);
 ?>
             <!-- Begin Page Content -->
             <div class="container-fluid">
@@ -30,14 +31,15 @@ $layNenDatTheoId = $dm_nendat->layNenDatTheoId($id);
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4 w-75 m-auto">
                     <div class="p-4 d-flex justify-content-center align-items-center">
-                        <form action="action/them_nendat.php" method="post" enctype="multipart/form-data">
+                        <form action="action/edit_nendat.php" method="post" enctype="multipart/form-data">
+                            <input type="number" name="id_nendat" value="<?=$id ?>" hidden>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <label for="ten_khudat"><b>Tên khu đất:</b></label>
                                     <select id="khudat" name="ten_khudat" class="form-control">
                                         <?php foreach($layTatCaKhuDat as $item){ ?>
-                                            <option value="<?=$item['khudat_id']?>"><?=$item['ten_khudat']?></option>
+                                            <option class="khudatDiv" value="<?=$item['khudat_id']?>"><?=$item['ten_khudat']?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -45,7 +47,7 @@ $layNenDatTheoId = $dm_nendat->layNenDatTheoId($id);
                                     <label for="ten_lodat"><b>Tên lô đất:</b></label>
                                     <select id="lodat" name="ten_lodat" class="form-control">
                                         <?php foreach($layTatCaLoDat as $item){ ?>
-                                            <option value="<?=$item['id']?>"><?=$item['ten_lodat']?></option>
+                                            <option class="nendatDiv" value="<?=$item['lodat_id']?>"><?=$item['ten_lodat']?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -55,11 +57,11 @@ $layNenDatTheoId = $dm_nendat->layNenDatTheoId($id);
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <label for="loai_nen"><b>Tên nền đất:</b></label>
-                                    <input type="text" class="form-control" name="ten_nen" placeholder="Nhập ..." required>
+                                    <input type="text" class="form-control" name="ten_nen" value="<?=$layNenDatTheoId[0]['ten_nendat']?>" placeholder="Nhập ..." required>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <label for="loai_nen"><b>Lộ giới(m):</b></label>
-                                    <input type="number" class="form-control" name="lo_gioi" value="0" required>
+                                    <input type="number" class="form-control" name="lo_gioi" value="<?=$layNenDatTheoId[0]['lo_gioi']?>" required>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +70,7 @@ $layNenDatTheoId = $dm_nendat->layNenDatTheoId($id);
                                 <div class="col-lg-3 col-md-6 col-6">
                                     <label for=""><b>Chiều dài:</b> </label>
                                     <div class="input-group mb-3">
-                                        <input type="number" name="chieu_dai" class="form-control" value="0" aria-label="chieu_dai" aria-describedby="chieu_dai">
+                                        <input type="number" name="chieu_dai" class="form-control" value="<?=$layNenDatTheoId[0]['chieu_dai']?>" aria-label="chieu_dai" aria-describedby="chieu_dai">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="chieu_dai">m</span>
                                         </div>
@@ -77,7 +79,7 @@ $layNenDatTheoId = $dm_nendat->layNenDatTheoId($id);
                                 <div class="col-lg-3 col-md-6 col-6">
                                     <label for=""><b> Chiều rộng:</b></label>
                                     <div class="input-group mb-3">
-                                        <input type="number" name="chieu_rong" class="form-control"  value="0" aria-label="chieu_rong" aria-describedby="chieu_rong">
+                                        <input type="number" name="chieu_rong" class="form-control"   value="<?=$layNenDatTheoId[0]['chieu_rong']?>" aria-label="chieu_rong" aria-describedby="chieu_rong">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="chieu_rong">m</span>
                                         </div>
@@ -86,7 +88,7 @@ $layNenDatTheoId = $dm_nendat->layNenDatTheoId($id);
                                 <div class="col-lg-3 col-md-6 col-6">
                                     <label for=""><b>Diện tích:</b> </label>
                                     <div class="input-group mb-3">
-                                        <input type="number" name="dien_tich" class="form-control" value="0" aria-label="dien_tich" aria-describedby="dien_tich">
+                                        <input type="number" name="dien_tich" class="form-control" value="<?=$layNenDatTheoId[0]['dien_tich']?>" aria-label="dien_tich" aria-describedby="dien_tich">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="dien_tich">m <sup>2</sup></span>
                                         </div>
@@ -95,7 +97,7 @@ $layNenDatTheoId = $dm_nendat->layNenDatTheoId($id);
                                 <div class="col-lg-3 col-md-6 col-6">
                                     <label for=""><b> Diện tích XD:</b></label>
                                     <div class="input-group mb-3">
-                                        <input type="number" name="dien_tich_xd" class="form-control"  value="0" aria-label="dien_tich_xd" aria-describedby="dien_tich_xd">
+                                        <input type="number" name="dien_tich_xd" class="form-control" value="<?=$layNenDatTheoId[0]['dien_tich_xd']?>" aria-label="dien_tich_xd" aria-describedby="dien_tich_xd">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="dien_tich_xd">m <sup>2</sup></span>
                                         </div>
@@ -107,33 +109,35 @@ $layNenDatTheoId = $dm_nendat->layNenDatTheoId($id);
                             <div class="row">
                                 <div class="col-lg-3 col-md-6 col-12">
                                     <label for="loai_nen"><b>Giá(VND):</b></label>
-                                    <input type="number" class="form-control" name="gia" value="0" required>
+                                    <input type="number" class="form-control" name="gia" value="<?=$layNenDatTheoId[0]['gia']?>" required>
                                 </div>
                                 <div class="col-lg-3 col-md-6 col-12">
                                     <label for="loai_nen"><b>Số tầng:</b></label>
-                                    <input type="number" class="form-control" name="so_tang" value="0" required>
+                                    <input type="number" class="form-control" name="so_tang" value="<?=$layNenDatTheoId[0]['so_tang']?>" required>
                                 </div>
                                 <div class="col-lg-3 col-md-6 col-12">
                                     <label for="loai_nen"><b>Hiện trạng:</b></label>
                                     <select name="hien_trang" class="form-control">
-                                        <option value="Đã bán">Đã bán</option>
-                                        <option value="Chưa bán">Chưa bán</option>
-                                        <option value="Đang giao dịch">Đang giao dịch</option>
+                                        <option class="statusDiv" value="Đã bán">Đã bán</option>
+                                        <option class="statusDiv" value="Chưa bán">Chưa bán</option>
+                                        <option class="statusDiv" value="Đang giao dịch">Đang giao dịch</option>
                                     </select>
                                 </div>
                                 <div class="col-lg-3 col-md-6 col-12">
                                     <label for="loai_nen"><b>Số HĐ:</b></label>
-                                    <input type="number" class="form-control" name="id_hd" value="0" required>
+                                    <input type="number" class="form-control" name="id_hd" value="<?=$layNenDatTheoId[0]['id_hd']?>" required>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="image">Chọn hình minh họa:</label>
-                            <input type="file" name="image" class="form-control" required>
+                            <img src="./public/img/nen_dat/<?=$layNenDatTheoId[0]['image']?>" height="300px" id="img_thumbnail" alt="<?=$layNenDatTheoId[0]['image']?>">
+                            <input id="change_img" type="file" name="image" class="form-control" value="<?=$layNenDatTheoId[0]['image']?>">
+                            <input type="text" value="<?=$layNenDatTheoId[0]['image']?>" name="name_img_product" hidden>
                         </div>
                         <div class="form-group">
                             <label for="mo_ta"><b>Mô tả:</b></label>
-                            <textarea name="mo_ta" class="form-control"></textarea>
+                            <textarea name="mo_ta" class="form-control"><?=$layNenDatTheoId[0]['mo_ta']?></textarea>
                         </div>
                         <div class="form-group">
                             <input type="text" id="name_duan" disabled>
@@ -149,6 +153,21 @@ $layNenDatTheoId = $dm_nendat->layNenDatTheoId($id);
             </div>
             <!-- End of Main Content -->
 
+    <script>
+        for (var i = 0; i < document.querySelectorAll('.khudatDiv').length; i++) {
+            if (document.querySelectorAll('.khudatDiv')[i].value == '<?= $layNenDatTheoId[0]['id_khudat']?>') {
+                document.querySelectorAll('.khudatDiv')[i].selected = true;
+                break;
+            }
+        }
+        for (var i = 0; i < document.querySelectorAll('.statusDiv').length; i++) {
+            if (document.querySelectorAll('.statusDiv')[i].value == '<?= $layNenDatTheoId[0]['hien_trang']?>') {
+                document.querySelectorAll('.statusDiv')[i].selected = true;
+                break;
+            }
+        }
+        let ID_KHUDAT = <?= $layNenDatTheoId[0]['id_lodat']; ?>;
+    </script>
     <script>
         var reader;
         let change_img = document.querySelector("#change_img");

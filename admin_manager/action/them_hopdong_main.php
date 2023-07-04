@@ -44,8 +44,10 @@ if(isset($_POST['type_hopdong']) && isset($_POST['so_hd']) && isset($_POST['ten_
 
         header('location: ../danhsach_hopdong.php');
     }catch(Throwable $err){
-        echo $err;
+        $_SESSION['error'] = $err;
+        header('location: ../404.php');
     }
 }else{
+    $_SESSION['error'] = $err;
     header('location: ../404.php');
 }

@@ -15,8 +15,7 @@ $layTatCaLoDat = $dm_lodat->layTatCaLoDat();
 $dm_khudat = new DoanhMucKhuDat();
 $layTatCaKhuDat = $dm_khudat->layTatCaKhuDat();
 
-$ql_duan = new QLDuAn();
-$layTatCaDuan = $ql_duan->layTatCaDuan();
+
 
 ?>
                 <!-- Begin Page Content -->
@@ -33,6 +32,7 @@ $layTatCaDuan = $ql_duan->layTatCaDuan();
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Danh sách các nền đất</h6>
                         </div>
+                        
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered custom-table" id="dataTable" width="max-content" cellspacing="0">
@@ -41,6 +41,7 @@ $layTatCaDuan = $ql_duan->layTatCaDuan();
                                             <th>STT</th>
                                             <th>Khu đất</th>
                                             <th>Lô đất</th>
+                                            <th>Nền đất</th>
                                             <th>Lộ giới(m)</th>
                                             <th>Chiều dài(m)</th>
                                             <th>Chiều rộng(m)</th>
@@ -53,8 +54,7 @@ $layTatCaDuan = $ql_duan->layTatCaDuan();
                                             <th>Hiện trạng</th>
                                             <th>Số HĐ</th>
                                             <th>Tên dự án</th>
-                                            <th width="1%"></th>
-                                            <th width="1%"></th>
+                                            <th width="1%">Func</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -66,6 +66,7 @@ $layTatCaDuan = $ql_duan->layTatCaDuan();
                                                 <td><?=$item['ten_khudat']?></td>
                                                 <td><?=$item['ten_lodat']?></td>
                                                 <td><?=$item['ten_nendat']?></td>
+                                                <td><?=$item['lo_gioi']?></td>
                                                 <td><?=$item['chieu_dai']?></td>
                                                 <td><?=$item['chieu_rong']?></td>
                                                 <td><?=$item['dien_tich']?></td>
@@ -74,13 +75,15 @@ $layTatCaDuan = $ql_duan->layTatCaDuan();
                                                 <td><?=$item['so_tang']?></td>
                                                 <td><?=$item['mo_ta']?></td>
                                                 <td>
-                                                    <img src="./public/img/nen_dat/<?=$item['image']?>" width="300px" class="img-fluid" alt="<?=$item['image']?>">
+                                                    <img src="./public/img/nen_dat/<?=$item['images']?>" width="300px" class="img-fluid" alt="<?=$item['images']?>">
                                                 </td>
                                                 <td><?=$item['hien_trang']?></td>
                                                 <td><?=$item['id_hd']?></td>
                                                 <td><?=$item['ten_duan']?></td>
-                                                <td><a href="./edit_nendat.php?id=<?=$item['nendat_id']?>" class="icon edit"><i class='bx bx-edit'></i></a></td>
-                                                <td><a onclick="if(CheckForm() == false) return false" href="./action/xoa_khudat.php?id=<?=$item['nendat_id']?>" class="icon delete"><i class='bx bxs-message-square-x' ></i></a></td>
+                                                <td>
+                                                    <a href="./edit_nendat.php?id=<?=$item['nendat_id']?>" class="icon edit"><i class='bx bx-edit'></i></a>
+                                                    <a onclick="if(CheckForm() == false) return false" href="./action/xoa_nendat.php?id=<?=$item['nendat_id']?>" class="icon delete"><i class='bx bxs-message-square-x' ></i></a>
+                                                </td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>

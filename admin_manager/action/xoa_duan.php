@@ -13,5 +13,6 @@ try {
     $delete = $ql_duan->delete($id);
     header('location: ../index.php');
 } catch (Throwable $err) {
-    echo $err;
+    $_SESSION['error'] = $err;
+    header('location: ../404.php');
 }
